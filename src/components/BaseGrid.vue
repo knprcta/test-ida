@@ -1,5 +1,5 @@
 <template>
-  <div class="grid">
+  <div class="base-grid">
     <goods-add-form />
     <goods-list />
   </div>
@@ -16,9 +16,21 @@ export default {
 };
 </script>
 
-<style scoped>
-.grid {
+<style lang="scss" scoped>
+.base-grid {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-areas: "form list list list";
+  margin: auto;
+  max-width: 1440px;
+  box-sizing: border-box;
+  grid-template-columns: $grid_base;
+  gap: $g_l;
+  padding: $p_xl;
+}
+.form-container {
+  grid-area: form;
+}
+.list-container {
+  grid-area: list;
 }
 </style>

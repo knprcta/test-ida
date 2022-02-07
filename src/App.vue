@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import BaseGrid from '@/components/BaseGrid.vue';
+import BaseGrid from "@/components/BaseGrid.vue";
 
 export default {
   name: "App",
@@ -13,15 +13,15 @@ export default {
 };
 </script>
 
-<style>
-body {
-  margin: 0;
-}
+<style lang="scss">
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap");
+@import "./assets/styles/normalize.css";
+
 #app {
   min-height: 100vh;
-  background: rgba(255, 254, 251, 0.8);
-  padding: 32px;
-  box-sizing: border-box;
-  color: #3f3f3f;
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  background: $back_main;
+  line-height: $font_line;
+  color: $dark;
 }
 </style>

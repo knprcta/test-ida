@@ -1,24 +1,55 @@
 <template>
-  <div class="container">
-    <h1 class="heading">Добавление товара</h1>
+  <div class="form-container">
+    <h1 class="form-heading">Добавление товара</h1>
     <form class="form" action="">
       <div class="form-group">
-        <label class="label" for="">Наименование товара</label>
-        <input class="input" type="text" name="" id="" />
+        <label class="form-label" for=""
+          >Наименование товара<span class="dot-red"></span
+        ></label>
+        <input
+          class="form-input"
+          type="text"
+          name=""
+          id=""
+          placeholder="Введите наименование товара"
+        />
       </div>
       <div class="form-group">
-        <label class="label" for="">Описание товара</label>
-        <input class="input" type="text" name="" id="" />
+        <label class="form-label" for="">Описание товара</label>
+        <textarea
+          class="form-input"
+          type="text"
+          name=""
+          id=""
+          placeholder="Введите описание товара"
+          rows="6"
+        />
       </div>
       <div class="form-group">
-        <label class="label" for="">Ссылка на изображение товара</label>
-        <input class="input" type="text" name="" id="" />
+        <label class="form-label" for=""
+          >Ссылка на изображение товара<span class="dot-red"></span
+        ></label>
+        <input
+          class="form-input"
+          type="text"
+          name=""
+          id=""
+          placeholder="Введите ссылку"
+        />
       </div>
       <div class="form-group">
-        <label class="label" for="">Цена товара</label>
-        <input class="input" type="text" name="" id="" />
+        <label class="form-label" for=""
+          >Цена товара<span class="dot-red"></span
+        ></label>
+        <input
+          class="form-input"
+          type="text"
+          name=""
+          id=""
+          placeholder="Введите ссылку"
+        />
       </div>
-      <button class="button">Добавить товар</button>
+      <button class="form-submit" disabled>Добавить товар</button>
     </form>
   </div>
 </template>
@@ -27,37 +58,66 @@
 export default {};
 </script>
 
-<style scoped>
-.container {
+<style lang="scss" scoped>
+.form-container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-right: 16px;
+  gap: $g_l;
 }
-.heading {
+.form-heading {
   margin: 0;
+  font-size: $font_xxl;
+  font-weight: $font_normal;
 }
 .form {
-  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  background: #fffefb;
-  box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04),
-    0px 6px 10px rgba(0, 0, 0, 0.02);
-  border-radius: 4px;
+  background: $back;
+  border-radius: $radius;
+  box-shadow: $shadow_big;
+  gap: $g_l;
+  padding: $p_l;
 }
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: $g_s;
 }
-.label {
+.form-label {
+  display: flex;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  color: $light;
+  font-size: $font_xs;
 }
-.input {
-  padding: 10px 16px;
+.form-input {
+  resize: none;
+  background: $back;
+  border: $border;
+  border-radius: $radius;
+  box-shadow: $shadow_small;
+  font-size: $font_s;
+  padding: $p_s $p_m;
 }
-.button {
-  padding: 10px;
+.form-submit {
+  background: $green;
+  border: $border;
+  border-radius: $radius_big;
+  box-shadow: $shadow_xsmall;
+  color: $white;
+  font-size: $font_s;
+  font-weight: $font_bold;
+  padding: $p_s;
+}
+.form-submit:disabled {
+  background: $disabled;
+  box-shadow: none;
+  color: $grey;
+}
+.dot-red {
+  border-radius: 50%;
+  background-color: $red;
+  width: $font-base;
+  height: $font-base;
 }
 </style>
