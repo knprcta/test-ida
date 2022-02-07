@@ -20,8 +20,16 @@ export default {
 #app {
   min-height: 100vh;
   font-family: "Source Sans Pro", Helvetica, sans-serif;
+  font-weight: $font_normal;
   background: $back_main;
   line-height: $font_line;
   color: $dark;
+}
+.btn {
+  transition: all 0.4s ease;
+}
+.btn:hover {
+  cursor: pointer;
+  box-shadow: $shadow_hover;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="list-container">
-    <button class="list-sort">
+    <button class="list-sort btn">
       По умолчанию
       <img src="@/assets/images/arrow.svg" alt="↓" class="list-sort-arrow" />
     </button>
@@ -10,9 +10,9 @@
         <div class="list-item-wrapper">
           <p class="list-item-name no-margin">{{ item.name }}</p>
           <p class="list-item-description no-margin">{{ item.description }}</p>
-          <p class="list-item-price no-margin">{{ item.price }} руб.</p>
+          <p class="list-item-price no-margin">{{ item.price.toLocaleString() }} руб.</p>
         </div>
-        <button class="list-item-delete-btn">
+        <button class="list-item-delete-btn btn">
           <img
             src="@/assets/images/trash.svg"
             alt="Кнопка удаления"
@@ -113,6 +113,14 @@ export default {
   font-size: 0;
   right: -8px;
   top: -8px;
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.list-item:hover {
+  .list-item-delete-btn {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 </style>

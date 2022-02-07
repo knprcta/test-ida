@@ -49,7 +49,7 @@
           placeholder="Введите ссылку"
         />
       </div>
-      <button class="form-submit" disabled>Добавить товар</button>
+      <button class="form-submit btn">Добавить товар</button>
     </form>
   </div>
 </template>
