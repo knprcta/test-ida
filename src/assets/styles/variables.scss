@@ -1,0 +1,45 @@
+// colors
+$dark: #3f3f3f;
+$light: #49485e;
+$grey: #b4b4b4;
+$back: #fffefb;
+$back_main: #fffefbcc;
+$red: #ff8484;
+$green: #7bae73;
+$white: #ffffff;
+$disabled: #eeeeee;
+// shadows
+$shadow_big: 0px 20px 30px rgba(0, 0, 0, 0.04), 0px 6px 10px rgba(0, 0, 0, 0.02);
+$shadow_small: 0px 2px 5px rgba(0, 0, 0, 0.1);
+$shadow_xsmall: 0px 2px 4px rgba(0, 0, 0, 0.1);
+$shadow_hover: 0px 0px 10px 3px rgba(0, 0, 0, 0.3);
+// grids
+$grid_count: 4;
+$grid_base: repeat($grid_count, 1fr);
+$grid_list: repeat(($grid_count - 1), 1fr);
+// fonts
+$font_normal: 400;
+$font_bold: 600;
+$font_line: 1.25;
+$font_base: 4px;
+$font_xs: $font_base * 2.5;
+$font_s: $font_base * 3;
+$font_m: $font_base * 4;
+$font_l: $font_base * 5;
+$font_xl: $font_base * 6;
+$font_xxl: $font_base * 7;
+// paddings
+$p_base: 4px;
+$p_xs: $p_base * 2;
+$p_s: $p_base * 2.5;
+$p_m: $p_base * 4;
+$p_l: $p_base * 6;
+$p_xl: $p_base * 8;
+// gaps
+$g_base: 4px;
+$g_s: $g_base;
+$g_l: $g_base * 4;
+// border
+$border: 0;
+$radius: 4px;
+$radius_big: 10px;
