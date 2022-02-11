@@ -1,61 +1,78 @@
 <template>
   <div class="form-container">
     <h1 class="form-heading">Добавление товара</h1>
-    <form class="form" action="">
-      <div class="form-group">
-        <label class="form-label" for=""
-          >Наименование товара<span class="dot-red"></span
-        ></label>
-        <input
-          class="form-input"
-          type="text"
-          name=""
-          id=""
-          placeholder="Введите наименование товара"
-        />
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="">Описание товара</label>
-        <textarea
-          class="form-input"
-          type="text"
-          name=""
-          id=""
-          placeholder="Введите описание товара"
-          rows="6"
-        />
-      </div>
-      <div class="form-group">
-        <label class="form-label" for=""
-          >Ссылка на изображение товара<span class="dot-red"></span
-        ></label>
-        <input
-          class="form-input"
-          type="text"
-          name=""
-          id=""
-          placeholder="Введите ссылку"
-        />
-      </div>
-      <div class="form-group">
-        <label class="form-label" for=""
-          >Цена товара<span class="dot-red"></span
-        ></label>
-        <input
-          class="form-input"
-          type="text"
-          name=""
-          id=""
-          placeholder="Введите ссылку"
-        />
-      </div>
-      <button class="form-submit btn">Добавить товар</button>
-    </form>
+    <VeeForm ref="form" class="form" v-slot="{ meta, errors }" @submit="save">
+      <goods-add-form-field
+        label="Наименование товара"
+        name="name"
+        rules="required"
+        placeholder="Введите наименование товара"
+        dot
+        :class="{ 'form-input-invalid': errors.name }"
+        v-model="name"
+      />
+      <goods-add-form-field
+        as="textarea"
+        label="Описание товара"
+        name="description"
+        placeholder="Введите описание товара"
+        rows="6"
+        :class="{ 'form-input-invalid': errors.description }"
+        v-model="description"
+      />
+      <goods-add-form-field
+        label="Ссылка на изображение товара"
+        name="image"
+        rules="required|url"
+        placeholder="Введите ссылку"
+        dot
+        :class="{ 'form-input-invalid': errors.image }"
+        v-model="image"
+      />
+      <goods-add-form-field
+        label="Цена товара"
+        name="price"
+        rules="required|numeric"
+        placeholder="Введите цену"
+        dot
+        :class="{ 'form-input-invalid': errors.price }"
+        v-model.number="price"
+        type="number"
+      />
+      <button :disabled="!meta.valid" class="form-submit btn" type="submit">
+        Добавить товар
+      </button>
+    </VeeForm>
   </div>
 </template>
 
 <script>
-export default {};
+import GoodsAddFormField from "@/components/GoodsAddFormField.vue";
+export default {
+  components: {
+    GoodsAddFormField,
+  },
+  data() {
+    return {
+      name: "",
+      description: "",
+      image: "",
+      price: "",
+    };
+  },
+  methods: {
+    save() {
+      const newItem = {
+        name: this.name,
+        description: this.description,
+        image: this.image,
+        price: this.price,
+      };
+      this.$emit("save", { newItem }); // access under eventData.item
+      this.$refs.form.resetForm();
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -78,27 +95,6 @@ export default {};
   gap: $g_l;
   padding: $p_l;
 }
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: $g_s;
-}
-.form-label {
-  display: flex;
-  letter-spacing: -0.02em;
-  line-height: 1.3;
-  color: $light;
-  font-size: $font_xs;
-}
-.form-input {
-  resize: none;
-  background: $back;
-  border: $border;
-  border-radius: $radius;
-  box-shadow: $shadow_small;
-  font-size: $font_s;
-  padding: $p_s $p_m;
-}
 .form-submit {
   background: $green;
   border: $border;
@@ -108,16 +104,13 @@ export default {};
   font-size: $font_s;
   font-weight: $font_bold;
   padding: $p_s;
+  margin-top: $p_xs;
 }
 .form-submit:disabled {
   background: $disabled;
   box-shadow: none;
   color: $grey;
-}
-.dot-red {
-  border-radius: 50%;
-  background-color: $red;
-  width: $font-base;
-  height: $font-base;
+  transform: none;
+  cursor: default;
 }
 </style>

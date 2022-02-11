@@ -1,17 +1,30 @@
 <template>
   <div class="base-grid">
-    <goods-add-form />
-    <goods-list />
+    <goods-add-form @save="addItem"/>
+    <goods-list :items="goods" />
   </div>
 </template>
 
 <script>
+import sourceData from "@/data.json";
 import GoodsAddForm from "@/components/GoodsAddForm.vue";
 import GoodsList from "@/components/GoodsList.vue";
 export default {
   components: {
     GoodsAddForm,
     GoodsList,
+  },
+  data() {
+    return { goods: sourceData };
+  },
+  methods: {
+    addItem(eventData) {
+      const newItem = {
+        ...eventData.newItem,
+      };
+      newItem.id = this.goods.length + 1;
+      this.goods.push(newItem);
+    },
   },
 };
 </script>
