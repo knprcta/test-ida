@@ -83,6 +83,10 @@ export default {
       };
       this.$emit("save", { newItem }); // access under eventData.item
       this.$refs.form.resetForm();
+      this.name = "";
+      this.description = "";
+      this.image = "";
+      this.price = "";
     },
   },
 };
