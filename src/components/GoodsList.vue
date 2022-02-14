@@ -4,13 +4,17 @@
       По умолчанию
       <img src="@/assets/images/arrow.svg" alt="↓" class="list-sort-arrow" />
     </button>
-    <ul class="list">
-      <li class="list-item" v-for="item in goods" :key="item.id">
+    <transition-group class="list" name="list" tag="ul">
+      <li class="list-item" v-for="item in reversedItems" :key="item.id">
         <img :src="item.image" :alt="item.name" class="list-item-image" />
         <div class="list-item-wrapper">
           <p class="list-item-name no-margin">{{ item.name }}</p>
-          <p class="list-item-description no-margin">{{ item.description }}</p>
-          <p class="list-item-price no-margin">{{ item.price.toLocaleString() }} руб.</p>
+          <p class="list-item-description no-margin">
+            {{ item.description }}
+          </p>
+          <p class="list-item-price no-margin">
+            {{ Number(item.price).toLocaleString() }} руб.
+          </p>
         </div>
         <button class="list-item-delete-btn btn">
           <img
@@ -18,19 +22,23 @@
             alt="Кнопка удаления"
             class="list-item-delete-btn-icon"
           />
-        </button>
-      </li>
-    </ul>
+        </button></li
+    ></transition-group>
   </div>
 </template>
 
 <script>
-import sourceData from "@/data.json";
 export default {
-  data() {
-    return {
-      goods: sourceData,
-    };
+  props: {
+    items: {
+      required: true,
+      type: Array,
+    },
+  },
+  computed: {
+    reversedItems() {
+      return [...this.items].reverse();
+    },
   },
 };
 </script>
@@ -72,6 +80,7 @@ export default {
   background: $back;
   border-radius: $radius;
   box-shadow: $shadow_big;
+  transition: all 2s ease;
 }
 .list-item-image {
   width: 100%;
@@ -84,6 +93,7 @@ export default {
   height: 100%;
   flex-direction: column;
   justify-content: space-between;
+  word-break: break-word;
   gap: $g_l;
   padding: $p_m $p_m $p_l;
 }
@@ -122,5 +132,9 @@ export default {
     visibility: visible;
     opacity: 1;
   }
+}
+
+.list-move {
+  transition: all 1s ease;
 }
 </style>
