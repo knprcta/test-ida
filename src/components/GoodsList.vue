@@ -13,7 +13,7 @@
             {{ item.description }}
           </p>
           <p class="list-item-price no-margin">
-            {{ item.price.toLocaleString() }} руб.
+            {{ Number(item.price).toLocaleString() }} руб.
           </p>
         </div>
         <button class="list-item-delete-btn btn">

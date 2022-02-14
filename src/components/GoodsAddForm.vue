@@ -32,12 +32,11 @@
       <goods-add-form-field
         label="Цена товара"
         name="price"
-        rules="required|numeric"
+        :rules="{ required: true, regex: /[0-9 ]+$/ }"
         placeholder="Введите цену"
         dot
         :class="{ 'form-input-invalid': errors.price }"
-        v-model.number="price"
-        type="number"
+        v-model="formattedPrice"
       />
       <button :disabled="!meta.valid" class="form-submit btn" type="submit">
         Добавить товар
@@ -59,6 +58,20 @@ export default {
       image: "",
       price: "",
     };
+  },
+  computed: {
+    formattedPrice: {
+      get() {
+        if (this.price !== "") {
+          return Number(this.price).toLocaleString();
+        } else {
+          return null;
+        }
+      },
+      set(newValue) {
+        this.price = newValue.replace(/[^+\d]/g, '');
+      },
+    },
   },
   methods: {
     save() {

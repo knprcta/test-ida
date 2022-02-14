@@ -5,12 +5,13 @@ import {
   defineRule,
   configure,
 } from 'vee-validate';
-import { required, url, numeric } from '@vee-validate/rules';
+import { required, url, numeric, regex } from '@vee-validate/rules';
 import { localize, setLocale } from '@vee-validate/i18n';
 export default (app) => {
   defineRule('required', required);
   defineRule('url', url);
   defineRule('numeric', numeric);
+  defineRule('regex', regex);
 
   configure({
     generateMessage: localize({
@@ -19,6 +20,7 @@ export default (app) => {
           required: 'Поле является обязательным',
           url: 'Невалидная ссылка',
           numeric: 'Необходимо ввести числовое значение',
+          regex: 'Необходимо ввести числовое значение',
         },
       },
     }),

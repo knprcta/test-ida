@@ -51,8 +51,11 @@ export default {
   padding: $p_s $p_m;
   outline: none;
 }
-.form-input:focus {
+.form-input:hover {
   box-shadow: 0px 0px 0px 1px $grey;
+}
+.form-input:focus {
+  box-shadow: 0px 0px 0px 1px $dark;
 }
 .form-error {
   font-size: $font_xxs;
@@ -65,7 +68,7 @@ export default {
   box-shadow: 0px 0px 0px 1px $red !important;
 }
 .form-input-invalid:focus {
-  box-shadow: 0px 0px 3px 1px $red !important;
+  box-shadow: 0px 0px 0px 2px $red !important;
 }
 .dot-red {
   border-radius: 50%;
