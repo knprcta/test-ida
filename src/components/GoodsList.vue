@@ -1,11 +1,14 @@
 <template>
   <div class="list-container">
-    <button class="list-sort btn">
-      По умолчанию
-      <img src="@/assets/images/arrow.svg" alt="↓" class="list-sort-arrow" />
-    </button>
+    <select class="list-sort" v-model="selected">
+      <option disabled>Сортировка:</option>
+      <option value="default">По умолчанию</option>
+      <option value="byMinPrice">Сначала недорогие</option>
+      <option value="byMaxPrice">Сначала дорогие</option>
+      <option value="byName">По наименованию</option>
+    </select>
     <transition-group class="list" name="fade" tag="ul">
-      <li class="list-item" v-for="item in reversedItems" :key="item.id">
+      <li class="list-item" v-for="item in sortedItems" :key="item.id">
         <img :src="item.image" :alt="item.name" class="list-item-image" />
         <div class="list-item-wrapper">
           <p class="list-item-name no-margin">{{ item.name }}</p>
@@ -39,9 +42,27 @@ export default {
       type: Array,
     },
   },
+  data() {
+    return {
+      selected: "default",
+    };
+  },
   computed: {
     reversedItems() {
       return [...this.items].reverse();
+    },
+    sortedItems() {
+      switch (this.selected) {
+        case "default":
+          return [...this.items].reverse();
+        case "byMinPrice":
+          return [...this.items].sort((a, b) => a.price > b.price ? 1 : -1);
+        case "byMaxPrice":
+          return [...this.items].sort((a, b) => a.price > b.price ? -1 : 1);
+        case "byName":
+          return [...this.items].sort((a, b) => a.name > b.name ? 1 : -1);
+      }
+      return this.items;
     },
   },
   methods: {
@@ -60,19 +81,16 @@ export default {
 }
 .list-sort {
   align-self: flex-end;
-  display: flex;
-  align-items: center;
-  gap: 5px;
   background: $back;
   border: $border;
   border-radius: $radius;
   box-shadow: $shadow_small;
   color: $grey;
   font-size: $font_s;
-  padding: $p_s $p_m;
-}
-.list-sort-arrow {
-  transform: rotate(45deg);
+  border-width: 8.75px 16px;
+  border-style: solid;
+  border-color: transparent;
+  outline: none;
 }
 .list {
   display: grid;
