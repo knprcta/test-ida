@@ -106,6 +106,8 @@ export default {
 .form {
   display: flex;
   flex-direction: column;
+  position: sticky;
+  top: 24px;
   background: $back;
   border-radius: $radius;
   box-shadow: $shadow_big;

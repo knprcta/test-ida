@@ -4,7 +4,7 @@
       По умолчанию
       <img src="@/assets/images/arrow.svg" alt="↓" class="list-sort-arrow" />
     </button>
-    <transition-group class="list" name="list" tag="ul">
+    <transition-group class="list" name="fade" tag="ul">
       <li class="list-item" v-for="item in reversedItems" :key="item.id">
         <img :src="item.image" :alt="item.name" class="list-item-image" />
         <div class="list-item-wrapper">
@@ -16,14 +16,18 @@
             {{ Number(item.price).toLocaleString() }} руб.
           </p>
         </div>
-        <button class="list-item-delete-btn btn">
+        <button
+          class="list-item-delete-btn btn"
+          @click="deleteFromList(item.id)"
+        >
           <img
             src="@/assets/images/trash.svg"
             alt="Кнопка удаления"
             class="list-item-delete-btn-icon"
           />
-        </button></li
-    ></transition-group>
+        </button>
+      </li>
+    </transition-group>
   </div>
 </template>
 
@@ -38,6 +42,11 @@ export default {
   computed: {
     reversedItems() {
       return [...this.items].reverse();
+    },
+  },
+  methods: {
+    deleteFromList(id) {
+      this.$emit("delete", id);
     },
   },
 };
@@ -67,6 +76,7 @@ export default {
 }
 .list {
   display: grid;
+  position: relative;
   margin: 0;
   padding: 0;
   gap: $g_l;
@@ -80,7 +90,15 @@ export default {
   background: $back;
   border-radius: $radius;
   box-shadow: $shadow_big;
-  transition: all 2s ease;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0px);
+
+  &:hover {
+    .list-item-delete-btn {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
 }
 .list-item-image {
   width: 100%;
@@ -90,7 +108,8 @@ export default {
 }
 .list-item-wrapper {
   display: flex;
-  height: 100%;
+  box-sizing: border-box;
+  height: calc(100% - 200px);
   flex-direction: column;
   justify-content: space-between;
   word-break: break-word;
@@ -127,14 +146,27 @@ export default {
   opacity: 0;
 }
 
-.list-item:hover {
-  .list-item-delete-btn {
-    visibility: visible;
-    opacity: 1;
-  }
+.fade-enter {
+  opacity: 0;
 }
 
-.list-move {
-  transition: all 1s ease;
+.fade-enter-active {
+  transition: all 1s;
+}
+
+.fade-leave-active {
+  transition: all 0s;
+  opacity: 0;
+  transform: translateY(0);
+  position: absolute;
+}
+
+.fade-move {
+  transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+  @for $i from 1 through 15 {
+    &:nth-child(#{$i}) {
+      transition: transform 0.4s #{$i * 0.1}s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+  }
 }
 </style>

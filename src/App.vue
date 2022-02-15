@@ -38,7 +38,7 @@ export default {
   box-shadow: $shadow_hover;
   transform: scale(1.1);
 }
-nput[type="number"] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 input[type="number"]:hover,

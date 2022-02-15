@@ -1,7 +1,7 @@
 <template>
   <div class="base-grid">
-    <goods-add-form @save="addItem"/>
-    <goods-list :items="goods" />
+    <goods-add-form @save="addItem" />
+    <goods-list :items="goods" @delete="deleteItem" />
   </div>
 </template>
 
@@ -15,7 +15,17 @@ export default {
     GoodsList,
   },
   data() {
-    return { goods: sourceData };
+    return {
+      goods: [],
+    };
+  },
+  watch: {
+    goods: {
+      handler: function (newArr) {
+        localStorage.setItem("goods", JSON.stringify(newArr));
+      },
+      deep: true,
+    },
   },
   methods: {
     addItem(eventData) {
@@ -25,6 +35,12 @@ export default {
       newItem.id = this.goods.length + 1;
       this.goods.push(newItem);
     },
+    deleteItem(id) {
+      this.goods = this.goods.filter((item) => item.id !== id);
+    },
+  },
+  mounted() {
+    this.goods = JSON.parse(localStorage.getItem("goods")) || sourceData;
   },
 };
 </script>
