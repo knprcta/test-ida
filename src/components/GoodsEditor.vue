@@ -1,41 +1,41 @@
 <template>
-  <div class="form-container">
+  <div class="goods-editor">
     <h1 class="form-heading">Добавление товара</h1>
-    <VeeForm ref="form" class="form" v-slot="{ meta, errors }" @submit="save">
-      <goods-add-form-field
+    <VeeForm ref="form" class="form-container" v-slot="{ meta, errors }" @submit="save">
+      <goods-editor-field
         label="Наименование товара"
         name="name"
         rules="required"
         placeholder="Введите наименование товара"
         dot
-        :class="{ 'form-input-invalid': errors.name }"
+        :invalid="errors.name"
         v-model="name"
       />
-      <goods-add-form-field
+      <goods-editor-field
         as="textarea"
         label="Описание товара"
         name="description"
         placeholder="Введите описание товара"
         rows="6"
-        :class="{ 'form-input-invalid': errors.description }"
+        :invalid="errors.description"
         v-model="description"
       />
-      <goods-add-form-field
+      <goods-editor-field
         label="Ссылка на изображение товара"
         name="image"
         rules="required|url"
         placeholder="Введите ссылку"
         dot
-        :class="{ 'form-input-invalid': errors.image }"
+        :invalid="errors.image"
         v-model="image"
       />
-      <goods-add-form-field
+      <goods-editor-field
         label="Цена товара"
         name="price"
         :rules="{ required: true, regex: /[0-9 ]+$/ }"
         placeholder="Введите цену"
         dot
-        :class="{ 'form-input-invalid': errors.price }"
+        :invalid="errors.price"
         v-model="formattedPrice"
       />
       <button :disabled="!meta.valid" class="form-submit btn" type="submit">
@@ -46,10 +46,10 @@
 </template>
 
 <script>
-import GoodsAddFormField from "@/components/GoodsAddFormField.vue";
+import GoodsEditorField from '@/components/GoodsEditorField.vue';
 export default {
   components: {
-    GoodsAddFormField,
+    GoodsEditorField,
   },
   data() {
     return {
@@ -69,7 +69,7 @@ export default {
         }
       },
       set(newValue) {
-        this.price = newValue.replace(/[^+\d]/g, '');
+        this.price = newValue.replace(/[^+\d]/g, "");
       },
     },
   },
@@ -81,7 +81,7 @@ export default {
         image: this.image,
         price: this.price,
       };
-      this.$emit("save", { newItem }); // access under eventData.item
+      this.$emit("save", { newItem });
       this.$refs.form.resetForm();
       this.name = "";
       this.description = "";
@@ -93,43 +93,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form-container {
+.goods-editor {
   display: flex;
   flex-direction: column;
-  gap: $g_l;
+  gap: size(4);
 }
 .form-heading {
   margin: 0;
-  font-size: $font_xxl;
-  font-weight: $font_normal;
+  font-size: font(7);
 }
-.form {
+.form-container {
   display: flex;
   flex-direction: column;
   position: sticky;
-  top: 24px;
-  background: $back;
-  border-radius: $radius;
-  box-shadow: $shadow_big;
-  gap: $g_l;
-  padding: $p_l;
+  top: size(6);
+  background-color: color(back);
+  border-radius: size(1);
+  box-shadow: shadow(div);
+  gap: size(4);
+  padding: size(8);
 }
 .form-submit {
-  background: $green;
-  border: $border;
-  border-radius: $radius_big;
-  box-shadow: $shadow_xsmall;
-  color: $white;
-  font-size: $font_s;
-  font-weight: $font_bold;
-  padding: $p_s;
-  margin-top: $p_xs;
-}
-.form-submit:disabled {
-  background: $disabled;
-  box-shadow: none;
-  color: $grey;
-  transform: none;
-  cursor: default;
+  background-color: color(green);
+  border: 0;
+  border-radius: size(2.5);
+  box-shadow: shadow(btn);
+  color: white;
+  font-size: font(3);
+  font-weight: 600;
+  padding: size(2.5);
+  margin-top: size(2);
 }
 </style>

@@ -32,48 +32,36 @@ export default {
   display: flex;
   flex-direction: column;
   position: relative;
-  gap: $g_s;
+  gap: size(1);
 }
 .form-label {
   display: flex;
   letter-spacing: -0.02em;
   line-height: 1.3;
-  color: $light;
-  font-size: $font_xs;
+  color: color(light);
+  font-size: font(2.5);
 }
 .form-input {
   resize: none;
-  background: $back;
-  border: $border;
-  border-radius: $radius;
-  box-shadow: $shadow_small;
-  font-size: $font_s;
-  padding: $p_s $p_m;
+  background-color: color(back);
+  border: 0;
+  border-radius: size(1);
+  box-shadow: shadow(sel);
+  font-size: font(3);
+  padding: size(2.5) size(4);
   outline: none;
 }
-.form-input:hover {
-  box-shadow: 0px 0px 0px 1px $grey;
-}
-.form-input:focus {
-  box-shadow: 0px 0px 0px 1px $dark;
-}
 .form-error {
-  font-size: $font_xxs;
-  color: $red;
-  bottom: -($font_xxs + $p_base);
+  font-size: font(2);
+  color: color(red);
+  bottom: -(font(2) + size(1));
   letter-spacing: -0.02em;
   position: absolute;
 }
-.form-input-invalid {
-  box-shadow: 0px 0px 0px 1px $red !important;
-}
-.form-input-invalid:focus {
-  box-shadow: 0px 0px 0px 2px $red !important;
-}
 .dot-red {
   border-radius: 50%;
-  background-color: $red;
-  width: $font-base;
-  height: $font-base;
+  background-color: color(red);
+  width: font(1);
+  height: font(1);
 }
 </style>

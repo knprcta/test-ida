@@ -1,0 +1,30 @@
+// consts
+$font_base: 4px;
+$size_base: 4px;
+$grid_count: 4;
+//
+
+$colors: (
+  dark: #3f3f3f,
+  light: #49485e,
+  grey: #b4b4b4,
+  back: #fffefb,
+  back_main: #fffefbcc,
+  red: #ff8484,
+  green: #7bae73,
+  disabled: #eeeeee,
+);
+
+$shadows: (
+  div: (
+    0px 20px 30px rgba(0, 0, 0, 0.04),
+    0px 6px 10px rgba(0, 0, 0, 0.02),
+  ),
+  sel: 0px 2px 5px rgba(0, 0, 0, 0.1),
+  btn: 0px 2px 4px rgba(0, 0, 0, 0.1),
+);
+
+$grids: (
+  app: repeat($grid_count, 1fr),
+  list: repeat(($grid_count - 1), 1fr),
+);
