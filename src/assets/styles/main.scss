@@ -76,6 +76,10 @@ textarea {
   overflow: auto;
 }
 
+select {
+  appearance: none;
+}
+
 [hidden] {
   display: none;
 }

@@ -87,15 +87,18 @@ export default {
 .list-sort {
   align-self: flex-end;
   background-color: color(back);
+  background: url(../assets/images/arrow.svg) no-repeat;
+  background-position: right center;
   border: 0;
   border-radius: size(1);
   box-shadow: shadow(sel);
   color: color(grey);
   font-size: font(3);
-  border-width: size(2.1875) size(4);
+  outline: none;
+  border-width: size(2.5) size(4);
   border-style: solid;
   border-color: transparent;
-  outline: none;
+  padding-right: size(4);
 }
 .list-container {
   display: grid;

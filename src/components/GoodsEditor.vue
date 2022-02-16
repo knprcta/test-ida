@@ -111,7 +111,7 @@ export default {
   border-radius: size(1);
   box-shadow: shadow(div);
   gap: size(4);
-  padding: size(8);
+  padding: size(6);
 }
 .form-submit {
   background-color: color(green);
