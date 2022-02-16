@@ -33,7 +33,7 @@ export default {
       const newItem = {
         ...eventData.newItem,
       };
-      newItem.id = this.goods.length + 1;
+      newItem.id = Math.floor(Math.random() * 100000);
       this.goods.push(newItem);
     },
     deleteItem(id) {
