@@ -1,53 +1,77 @@
 <template>
-  <base-grid />
+  <div class="base-grid">
+    <goods-editor @save="addItem" />
+    <goods-list :items="goods" @delete="deleteItem" />
+  </div>
 </template>
 
 <script>
-import BaseGrid from "@/components/BaseGrid.vue";
-
+import sourceData from "@/data.json";
+import GoodsEditor from '@/components/GoodsEditor.vue';
+import GoodsList from "@/components/GoodsList.vue";
 export default {
   name: "App",
   components: {
-    BaseGrid,
+    GoodsEditor,
+    GoodsList
+  },
+  data() {
+    return {
+      goods: [],
+    };
+  },
+  watch: {
+    goods: {
+      handler: function (newArr) {
+        localStorage.setItem("goods", JSON.stringify(newArr));
+      },
+      deep: true,
+    },
+  },
+  methods: {
+    addItem(eventData) {
+      const newItem = {
+        ...eventData.newItem,
+      };
+      newItem.id = Math.floor(Math.random() * 100000);
+      this.goods.push(newItem);
+    },
+    deleteItem(id) {
+      this.goods = this.goods.filter((item) => item.id !== id);
+    },
+  },
+  mounted() {
+    this.goods = JSON.parse(localStorage.getItem("goods")) || sourceData;
   },
 };
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap");
-@import "./assets/styles/normalize.css";
-
 #app {
-  min-height: 100vh;
   font-family: "Source Sans Pro", Helvetica, sans-serif;
-  font-weight: $font_normal;
-  background: $back_main;
-  line-height: $font_line;
-  color: $dark;
+  font-weight: 400;
+  line-height: 1.25;
+  min-height: 100vh;
+  background-color: color(back_main);
+  color: color(dark);
 }
-.btn {
-  transition: all 0.4s ease;
-  outline: none;
+</style>
+
+<style lang="scss" scoped>
+.base-grid {
+  display: grid;
+  grid-template-areas: "form list list list";
+  margin: auto;
+  max-width: 1440px;
+  box-sizing: border-box;
+  grid-template-columns: grid(app);
+  gap: size(4);
+  padding: size(8);
 }
-.btn:hover {
-  cursor: pointer;
-  box-shadow: $shadow_hover;
-  transform: scale(1.1);
+.goods-editor {
+  grid-area: form;
 }
-.btn:focus {
-  box-shadow: $shadow_hover;
-  transform: scale(1.1);
-}
-nput[type="number"] {
-  -moz-appearance: textfield;
-}
-input[type="number"]:hover,
-input[type="number"]:focus {
-  -moz-appearance: number-input;
-}
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.goods-list {
+  grid-area: list;
 }
 </style>

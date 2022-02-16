@@ -5,12 +5,11 @@ import {
   defineRule,
   configure,
 } from 'vee-validate';
-import { required, url, numeric, regex } from '@vee-validate/rules';
+import { required, url, regex } from '@vee-validate/rules';
 import { localize, setLocale } from '@vee-validate/i18n';
 export default (app) => {
   defineRule('required', required);
   defineRule('url', url);
-  defineRule('numeric', numeric);
   defineRule('regex', regex);
 
   configure({
