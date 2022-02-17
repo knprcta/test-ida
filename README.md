@@ -1,24 +1,25 @@
 # test-ida
 
-## Project setup
+## Установка
+
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Компиляция и hot-reload для разработки
+
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Минимизировать для production
+
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### Форматировать код и исправить файлы
+
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

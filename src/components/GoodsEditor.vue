@@ -79,7 +79,7 @@ export default {
         name: this.name,
         description: this.description,
         image: this.image,
-        price: this.price,
+        price: Number(this.price),
       };
       this.$emit("save", { newItem });
       this.$refs.form.resetForm();
